@@ -1,0 +1,17 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DSS2014.Client.Styles">
+    
+    <Color x:Key="PrimaryGreenColor">#79B100</Color>
+    <Color x:Key="PrimaryPetrolColor">#298783</Color>
+    <Color x:Key="PrimaryForegroundColor">#3C3C3C</Color>
+    <Color x:Key="SecondaryForegroundColor">#6E6E6E</Color>
+    <Color x:Key="PrimaryBackgroundColor">#F8F8F8</Color>
+    
+    <SolidColorBrush x:Key="PrimaryGreenBrush" Color="{StaticResource PrimaryGreenColor}" />
+    <SolidColorBrush x:Key="PrimaryPetrolBrush" Color="{StaticResource PrimaryPetrolColor}" />
+    <SolidColorBrush x:Key="PrimaryForegroundBrush" Color="{StaticResource PrimaryForegroundColor}" />
+    <SolidColorBrush x:Key="SecondaryForegroundBrush" Color="{StaticResource SecondaryForegroundColor}" />
+    <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="{StaticResource PrimaryBackgroundColor}" />
+</ResourceDictionary>

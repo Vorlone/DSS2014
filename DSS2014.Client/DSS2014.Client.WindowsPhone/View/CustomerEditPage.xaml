@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="DSS2014.Client.View.CustomerEditPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DSS2014.Client.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:View="using:DSS2014.Client.View"
+    mc:Ignorable="d"
+    Background="{StaticResource PrimaryBackgroundBrush}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=CustomerEditViewModel}">
+
+    <Grid>
+        <View:CustomerEditControl />
+    </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Save" 
+                              x:Uid="CustomerEditAppBarButtonSave"
+                              Command="{Binding SaveCommand}"/>
+                <AppBarButton Icon="Cancel" 
+                              x:Uid="CustomerEditAppBarButtonCancel" 
+                              Command="{Binding CancelCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

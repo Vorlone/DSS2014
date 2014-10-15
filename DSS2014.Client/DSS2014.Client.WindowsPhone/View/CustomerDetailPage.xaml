@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="DSS2014.Client.View.CustomerDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DSS2014.Client.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:View="using:DSS2014.Client.View"
+    mc:Ignorable="d"
+    Background="{StaticResource PrimaryBackgroundBrush}"
+    DataContext="{Binding Source={StaticResource Locator}, Path=CustomerDetailViewModel}">
+
+    <Grid>
+        <View:CustomerDetailControl />
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Edit" 
+                              x:Uid="CustomerDetailAppBarButtonEdit" 
+                              Command="{Binding EditCommand}"/>
+                <AppBarButton Icon="Delete" 
+                              x:Uid="CustomerDetailAppBarButtonDelete"
+                              Command="{Binding DeleteCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
