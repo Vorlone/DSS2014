@@ -19,20 +19,17 @@ namespace DSS2014.Client.Portable.Service
             if (!String.IsNullOrEmpty(message))
                 requestContent = new StringContent(message, Encoding.UTF8, "application/json");
 
-            switch (mode)
+            try
             {
-                case HttpMode.Get:
-                    result = await _httpClient.GetAsync(requestUrl);
-                    break;
-                case HttpMode.Post:
-                    result = await _httpClient.PostAsync(requestUrl, requestContent);
-                    break;
-                case HttpMode.Put:
-                    result = await _httpClient.PutAsync(requestUrl, requestContent);
-                    break;
-                case HttpMode.Delete:
-                    result = await _httpClient.DeleteAsync(requestUrl);
-                    break;
+                result = await ExecuteHttpAsync(requestUrl, mode, requestContent);
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponse<string>
+                {
+                    HttpStatusCode = System.Net.HttpStatusCode.ServiceUnavailable,
+                    Message = ex.Message
+               };
             }
 
             var content = await result.Content.ReadAsStringAsync();
@@ -44,6 +41,23 @@ namespace DSS2014.Client.Portable.Service
                 Location = result.RequestMessage.RequestUri,
                 Result = content
             };
+        }
+
+        private async Task<HttpResponseMessage> ExecuteHttpAsync(string requestUrl, HttpMode mode, HttpContent requestContent)
+        {
+            switch (mode)
+            {
+                case HttpMode.Get:
+                    return await _httpClient.GetAsync(requestUrl);
+                case HttpMode.Post:
+                    return await _httpClient.PostAsync(requestUrl, requestContent);
+                case HttpMode.Put:
+                    return await _httpClient.PutAsync(requestUrl, requestContent);
+                case HttpMode.Delete:
+                    return await _httpClient.DeleteAsync(requestUrl);
+                default:
+                    return null;
+            }
         }
     }
 }
