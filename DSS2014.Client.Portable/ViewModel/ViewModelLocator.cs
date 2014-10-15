@@ -11,6 +11,7 @@ namespace DSS2014.Client.Portable.ViewModel
     {
         public const string CustomerDetailPageKey = "CustomerDetailPage";
         public const string CustomerEditPageKey = "CustomerEditPage";
+        public const string CustomersReloadNotification = "CustomersReloadNotification";
 
         public CustomersViewModel CustomersViewModel
         {

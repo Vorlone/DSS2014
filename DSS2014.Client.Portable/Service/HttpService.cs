@@ -33,8 +33,6 @@ namespace DSS2014.Client.Portable.Service
                 case HttpMode.Delete:
                     result = await _httpClient.DeleteAsync(requestUrl);
                     break;
-                default:
-                    break;
             }
 
             var content = await result.Content.ReadAsStringAsync();

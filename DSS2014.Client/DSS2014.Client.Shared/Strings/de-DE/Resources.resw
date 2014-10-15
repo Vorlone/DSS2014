@@ -126,6 +126,19 @@
   <data name="CustomerDetailAppBarButtonEdit.Label" xml:space="preserve">
     <value>bearbeiten</value>
   </data>
+  <data name="CustomerDetailConfirmDeleteButtonCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CustomerDetailConfirmDeleteButtonOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="CustomerDetailConfirmDeleteMessage" xml:space="preserve">
+    <value>Wollen Sie den Kunden {0} {1} wirklich löschen?</value>
+    <comment>{0} = FirstName, {1} = LastName</comment>
+  </data>
+  <data name="CustomerDetailConfirmDeleteTitle" xml:space="preserve">
+    <value>Kunde löschen</value>
+  </data>
   <data name="CustomerDetailLabelCity.Text" xml:space="preserve">
     <value>Ort</value>
   </data>
@@ -164,6 +177,15 @@
   </data>
   <data name="CustomersAppBarButtonRefresh.Label" xml:space="preserve">
     <value>aktualisieren</value>
+  </data>
+  <data name="CustomersDetailErrorDeleteButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="CustomersDetailErrorDeleteMessage" xml:space="preserve">
+    <value>Fehler beim Löschen. Bitte versuchen überprüfen Sie Ihre Internetverbindung und versuchen es erneut.</value>
+  </data>
+  <data name="CustomersDetailErrorDeleteTitle" xml:space="preserve">
+    <value>Fehler</value>
   </data>
   <data name="CustomersLoadingErrorMessage" xml:space="preserve">
     <value>Laden der Daten fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung und versuchen es erneut.</value>

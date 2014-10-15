@@ -1,6 +1,7 @@
 ﻿using DSS2014.Client.Portable.Model;
 using DSS2014.Client.Portable.Service;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
@@ -49,31 +50,25 @@ namespace DSS2014.Client.Portable.ViewModel
         {
             IsLoading = true;
 
+            HttpResponse<Customer> result;
+
             if (_customer.Id == Guid.Empty)
-                await SaveNewCustomer();
+                result = await _dataService.CreateCustomerAsync(_customer);
             else
-                await SaveExistingCustomer();
+                result = await _dataService.EditCustomerAsync(_customer);
 
-            IsLoading = false;
-        }
-
-        private async Task SaveNewCustomer()
-        {
-            var result = await _dataService.CreateCustomerAsync(_customer);
             if (result.IsSuccessStatusCode)
             {
                 Customer = null;
+                Messenger.Default.Send<NotificationMessage<Customer>>(new NotificationMessage<Customer>(result.Result, ViewModelLocator.CustomersReloadNotification));
                 _navigationService.GoBack();
             }
             else
             {
                 await _dialogService.ShowError("[Fehler beim Erstellen.]", "[Fehler]", "[OK]", null);
             }
-        }
 
-        private async Task SaveExistingCustomer()
-        { 
-
+            IsLoading = false;
         }
 
         private void Cancel()

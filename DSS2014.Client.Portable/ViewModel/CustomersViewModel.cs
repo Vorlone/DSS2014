@@ -1,6 +1,7 @@
 ﻿using DSS2014.Client.Portable.Model;
 using DSS2014.Client.Portable.Service;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,9 @@ namespace DSS2014.Client.Portable.ViewModel
 
             NewCommand = new RelayCommand(New);
             RefreshCommand = new RelayCommand(Refresh);
-            ShowCustomerDetailCommand = new RelayCommand<Customer>(ShowCustomerDetail);           
+            ShowCustomerDetailCommand = new RelayCommand<Customer>(ShowCustomerDetail);
+
+            Messenger.Default.Register<NotificationMessage<Customer>>(this, NotificationReceived);
 
             LoadCustomers();
         }
@@ -50,7 +53,7 @@ namespace DSS2014.Client.Portable.ViewModel
             var result = await _dataService.GetCustomersAsync();
             if (result.IsSuccessStatusCode && result.Result != null)
             {
-                Customers = result.Result.ToList();
+                Customers = result.Result.OrderBy(e => e.FirstName).ToList();
             }
             else
             {
@@ -74,6 +77,12 @@ namespace DSS2014.Client.Portable.ViewModel
         private void New()
         {
             _navigationService.NavigateTo(ViewModelLocator.CustomerEditPageKey);
+        }
+
+        private void NotificationReceived(NotificationMessage<Customer> message)
+        {
+            if (message.Notification == ViewModelLocator.CustomersReloadNotification)
+                LoadCustomers();
         }
     }
 }
