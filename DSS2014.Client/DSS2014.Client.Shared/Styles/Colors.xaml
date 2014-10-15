@@ -8,10 +8,14 @@
     <Color x:Key="PrimaryForegroundColor">#3C3C3C</Color>
     <Color x:Key="SecondaryForegroundColor">#6E6E6E</Color>
     <Color x:Key="PrimaryBackgroundColor">#F8F8F8</Color>
+    <Color x:Key="AppBarBackgroundColor">#EEEEEE</Color>
+    <Color x:Key="LightForegroundColor">#FFFFFF</Color>
     
     <SolidColorBrush x:Key="PrimaryGreenBrush" Color="{StaticResource PrimaryGreenColor}" />
     <SolidColorBrush x:Key="PrimaryPetrolBrush" Color="{StaticResource PrimaryPetrolColor}" />
     <SolidColorBrush x:Key="PrimaryForegroundBrush" Color="{StaticResource PrimaryForegroundColor}" />
     <SolidColorBrush x:Key="SecondaryForegroundBrush" Color="{StaticResource SecondaryForegroundColor}" />
     <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="{StaticResource PrimaryBackgroundColor}" />
+    <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="{StaticResource AppBarBackgroundColor}" />
+    <SolidColorBrush x:Key="LightForegroundBrush" Color="{StaticResource LightForegroundColor}" />
 </ResourceDictionary>

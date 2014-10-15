@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     
-    <ScrollViewer Padding="{StaticResource DefaultPagePadding}">
+    <ScrollViewer Padding="{StaticResource DefaultPagePadding}" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <!-- Header -->
             <StackPanel Orientation="Horizontal"

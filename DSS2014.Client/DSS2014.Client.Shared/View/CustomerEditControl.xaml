@@ -10,7 +10,7 @@
     d:DesignWidth="400">
     
     <Grid>
-        <ScrollViewer Padding="{StaticResource DefaultPagePadding}">
+        <ScrollViewer Padding="{StaticResource DefaultPagePadding}" VerticalScrollMode="Auto">
             <StackPanel>
                 <TextBlock Text="[Page Header]" Style="{StaticResource HeaderTextBlockStyle}" />
 

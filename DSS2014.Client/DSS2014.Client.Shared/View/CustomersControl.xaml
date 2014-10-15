@@ -8,8 +8,8 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     x:Class="DSS2014.Client.View.CustomersControl"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400"
+    d:DesignHeight="800"
+    d:DesignWidth="480"
     DataContext="{Binding CustomersViewModel, Source={StaticResource Locator}}">
     
 	<Grid>

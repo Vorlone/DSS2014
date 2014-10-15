@@ -51,7 +51,7 @@ namespace DSS2014.Client
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                //this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
 
@@ -93,10 +93,17 @@ namespace DSS2014.Client
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 #endif
 
+#if WINDOWS_PHONE_APP
+                var startPage = typeof(CustomersPage);
+#endif
+#if WINDOWS_APP
+                var startPage = typeof(MainPage);
+#endif
+
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(CustomersPage), e.Arguments))
+                if (!rootFrame.Navigate(startPage, e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }

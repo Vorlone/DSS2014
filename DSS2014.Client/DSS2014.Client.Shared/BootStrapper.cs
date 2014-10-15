@@ -22,13 +22,20 @@ namespace DSS2014.Client
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            var nav = new NavigationService();
 #if WINDOWS_PHONE_APP
+            var nav = new NavigationService();
             nav.Configure(ViewModelLocator.CustomerDetailPageKey, typeof(CustomerDetailPage));
             nav.Configure(ViewModelLocator.CustomerEditPageKey, typeof(CustomerEditPage));
+            SimpleIoc.Default.Register<INavigationService>(() => nav);
 #endif
 
+#if WINDOWS_APP
+            var nav = new BladeNavigationService();
+            nav.Configure(ViewModelLocator.CustomerDetailPageKey, typeof(CustomerDetailBlade));
+            nav.Configure(ViewModelLocator.CustomerEditPageKey, typeof(CustomerEditBlade));
             SimpleIoc.Default.Register<INavigationService>(() => nav);
+#endif
+
             SimpleIoc.Default.Register<IHttpService, HttpService>();
             SimpleIoc.Default.Register<IDataService, DataService>();
             SimpleIoc.Default.Register<IDialogService, DialogService>();
