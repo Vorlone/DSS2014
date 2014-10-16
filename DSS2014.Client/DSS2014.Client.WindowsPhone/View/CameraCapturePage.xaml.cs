@@ -86,5 +86,10 @@ namespace DSS2014.Client.View
         }
 
         public event EventHandler<IRandomAccessStream> PhotoCaptured;
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            CapturePhoto();
+        }
     }
 }

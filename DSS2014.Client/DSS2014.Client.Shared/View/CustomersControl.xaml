@@ -13,8 +13,14 @@
     DataContext="{Binding CustomersViewModel, Source={StaticResource Locator}}">
     
 	<Grid>
-        <ListView x:Name="CustomersList" ItemsSource="{Binding Customers}" Padding="{StaticResource DefaultPagePadding}" SelectionMode="None" 
-                  IsItemClickEnabled="True" ItemClick="CustomersList_ItemClick">
+        <ListView x:Name="CustomersList" 
+                  ItemsSource="{Binding Customers}" 
+                  Padding="{StaticResource DefaultPagePadding}" 
+                  SelectionMode="None" 
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  ScrollViewer.VerticalScrollMode="Enabled"
+                  IsItemClickEnabled="True" 
+                  ItemClick="CustomersList_ItemClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal"

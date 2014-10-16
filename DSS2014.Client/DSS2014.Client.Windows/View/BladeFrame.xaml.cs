@@ -104,5 +104,10 @@ namespace DSS2014.Client.View
         public delegate void BladeNavigatedEventHandler(object sender, object parameter);
         public event BladeNavigatedEventHandler Navigated;
 
+        private void Scroller_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            BladeHost.MaxHeight = ((FrameworkElement)sender).ActualHeight;
+        }
+
     }
 }

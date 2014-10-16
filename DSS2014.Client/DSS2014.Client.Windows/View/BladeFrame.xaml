@@ -11,10 +11,11 @@
     
     <Grid>
         <ScrollViewer x:Name="Scroller" 
-                VerticalScrollMode="Disabled" 
-                VerticalScrollBarVisibility="Hidden" 
-                HorizontalScrollMode="Auto" 
-                HorizontalScrollBarVisibility="Auto">
+                        VerticalScrollMode="Disabled" 
+                        VerticalScrollBarVisibility="Hidden" 
+                        HorizontalScrollMode="Auto" 
+                        HorizontalScrollBarVisibility="Auto"
+                      SizeChanged="Scroller_SizeChanged">
             <StackPanel x:Name="BladeHost" Orientation="Horizontal" />
         </ScrollViewer>
     </Grid>

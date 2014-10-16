@@ -11,4 +11,12 @@
     <Grid>
         <CaptureElement x:Name="CameraPreview" />
     </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Camera" Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
