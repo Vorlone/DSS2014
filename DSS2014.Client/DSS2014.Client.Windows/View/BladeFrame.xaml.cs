@@ -24,8 +24,6 @@ namespace DSS2014.Client.View
             this.InitializeComponent();
         }
 
-        private Blade _lastInteractionBlade = null;
-
         public bool CanGoBack
         {
             get
