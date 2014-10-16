@@ -43,6 +43,7 @@
     <Compile Include="Service\ICameraService.cs" />
     <Compile Include="Service\IDataService.cs" />
     <Compile Include="Service\IHttpService.cs" />
+    <Compile Include="Service\ILocalStorageService.cs" />
     <Compile Include="Service\IResourceService.cs" />
     <Compile Include="ViewModel\AsyncViewModelBase.cs" />
     <Compile Include="ViewModel\CustomerDetailViewModel.cs" />

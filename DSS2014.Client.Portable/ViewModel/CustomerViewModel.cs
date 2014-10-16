@@ -41,7 +41,7 @@ namespace DSS2014.Client.Portable.ViewModel
             IsLoading = true;
 
             var response = await _dataService.GetPhotoAsync(_customer.PhotoUrl);
-            if (response.IsSuccessStatusCode && response.Result != null)
+            if (response.Result != null)
             {
                 Photo = response.Result;
             }

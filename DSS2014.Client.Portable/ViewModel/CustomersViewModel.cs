@@ -51,7 +51,7 @@ namespace DSS2014.Client.Portable.ViewModel
             LoadingMessage = _resourceService.GetString("CustomersLoadingMessage");
 
             var result = await _dataService.GetCustomersAsync();
-            if (result.IsSuccessStatusCode && result.Result != null)
+            if (result.Result != null)
             {
                 Customers = (from c in result.Result.OrderBy(e => e.FirstName)
                              select new CustomerViewModel(c, _dataService)).ToList();

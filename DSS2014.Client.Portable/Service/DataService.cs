@@ -14,18 +14,21 @@ namespace DSS2014.Client.Portable.Service
         private const string API_URL = "api/{0}";
         private const string ASSET_URL = "Static/{0}";
         private const string CUSTOMER_URL = "Customers/{0}";
+        private const string CUSTOMERS_CACHE_KEY = "customers.json";
 
         private IHttpService _httpService;
+        private ILocalStorageService _localStorageService;
 
-        public DataService(IHttpService httpService)
+        public DataService(IHttpService httpService, ILocalStorageService localStorageService)
         {
             _httpService = httpService;
+            _localStorageService = localStorageService;
         }
 
         public async Task<HttpResponse<IEnumerable<Customer>>> GetCustomersAsync()
         {
             var requestUrl = CreateCustomerUrl();
-            return await GetDeserializedObject<IEnumerable<Customer>>(requestUrl, HttpMode.Get);
+            return await GetDeserializedObject<IEnumerable<Customer>>(requestUrl, HttpMode.Get, null, true, CUSTOMERS_CACHE_KEY);
         }
 
         public async Task<HttpResponse<Customer>> GetCustomerAsync(Guid id)
@@ -57,10 +60,24 @@ namespace DSS2014.Client.Portable.Service
         public async Task<HttpResponse<byte[]>> GetPhotoAsync(string fileName)
         {
             var requestUrl = ConvertToAbsoluteAssetUrl(fileName);
-            return await _httpService.GetBinaryAsync(requestUrl);
+            var result = await _httpService.GetBinaryAsync(requestUrl);
+            if (result.IsSuccessStatusCode)
+            {
+                await _localStorageService.WriteBinaryToStorageAsync(fileName, result.Result);
+            }
+            else
+            {
+                var cachedPhoto = await _localStorageService.ReadBinaryFromStorageAsync(fileName);
+                if (cachedPhoto != null)
+                {
+                    result.Result = cachedPhoto;
+                }
+            }
+
+            return result;
         }
 
-        private async Task<HttpResponse<T>> GetDeserializedObject<T>(string requestUrl, HttpMode mode, string message = null)
+        private async Task<HttpResponse<T>> GetDeserializedObject<T>(string requestUrl, HttpMode mode, string message = null, bool useCache = false, string cacheKey = null)
         {
             var result = await _httpService.ExecuteAsync(requestUrl, mode, message);
             var response = new HttpResponse<T> 
@@ -73,6 +90,17 @@ namespace DSS2014.Client.Portable.Service
             if (result.IsSuccessStatusCode)
             {
                 response.Result = await Task.Run(() => { return JsonConvert.DeserializeObject<T>(result.Result); });
+                if (useCache)
+                    await _localStorageService.WriteStringToStorageAsync(cacheKey, result.Result);
+            }
+            else
+            {
+                if (useCache)
+                {
+                    var cachedJsonString = await _localStorageService.ReadStringFromStorageAsync(cacheKey);
+                    if (!String.IsNullOrEmpty(cachedJsonString))
+                        response.Result = await Task.Run(() => { return JsonConvert.DeserializeObject<T>(cachedJsonString); });
+                }
             }
 
             return response;

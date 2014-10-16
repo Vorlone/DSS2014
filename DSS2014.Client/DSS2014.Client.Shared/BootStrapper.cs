@@ -41,6 +41,7 @@ namespace DSS2014.Client
             SimpleIoc.Default.Register<IDialogService, DialogService>();
             SimpleIoc.Default.Register<IResourceService, ResourceService>();
             SimpleIoc.Default.Register<ICameraService, CameraService>();
+            SimpleIoc.Default.Register<ILocalStorageService, LocalStorageService>();
 
             SimpleIoc.Default.Register<CustomersViewModel>();
             SimpleIoc.Default.Register<CustomerDetailViewModel>();
