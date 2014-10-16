@@ -120,6 +120,9 @@
   <data name="AppTitle" xml:space="preserve">
     <value>DSS2014 Sample</value>
   </data>
+  <data name="CustomerDetailAppBarButtonCamera.Label" xml:space="preserve">
+    <value>Foto aufnehmen</value>
+  </data>
   <data name="CustomerDetailAppBarButtonDelete.Label" xml:space="preserve">
     <value>löschen</value>
   </data>

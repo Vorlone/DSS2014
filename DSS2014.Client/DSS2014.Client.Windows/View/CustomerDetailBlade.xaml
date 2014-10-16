@@ -28,6 +28,10 @@
                 <AppBarButton Icon="Delete" 
                               x:Uid="CustomerDetailAppBarButtonDelete"
                               Command="{Binding DeleteCommand}"/>
+                <AppBarButton Icon="Camera" 
+                              x:Uid="CustomerDetailAppBarButtonCamera"
+                              Command="{Binding CapturePhotoCommand}"/>
+
             </StackPanel>
         </Border>
     </Grid>

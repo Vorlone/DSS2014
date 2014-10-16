@@ -17,10 +17,12 @@ namespace DSS2014.Client.Portable.ViewModel
         private INavigationService _navigationService;
         private IDialogService _dialogService;
         private IResourceService _resourceService;
+        private ICameraService _cameraService;
 
         public RelayCommand EditCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand<Customer> InitCommand { get; private set; }
+        public RelayCommand CapturePhotoCommand { get; private set; }
 
         private Customer _customer;
         public Customer Customer
@@ -29,16 +31,25 @@ namespace DSS2014.Client.Portable.ViewModel
             set { _customer = value; RaisePropertyChanged(); }
         }
 
-        public CustomerDetailViewModel(IDataService dataService, INavigationService navigationService, IDialogService dialogService, IResourceService resourceService)
+        private byte[] _photo;
+        public byte[] Photo
+        {
+            get { return _photo; }
+            set { _photo = value; RaisePropertyChanged(); }
+        }
+
+        public CustomerDetailViewModel(IDataService dataService, INavigationService navigationService, IDialogService dialogService, IResourceService resourceService, ICameraService cameraService)
         {
             _navigationService = navigationService;
             _dialogService = dialogService;
             _dataService = dataService;
             _resourceService = resourceService;
+            _cameraService = cameraService;
 
             InitCommand = new RelayCommand<Customer>(Init);
             EditCommand = new RelayCommand(Edit);
             DeleteCommand = new RelayCommand(Delete);
+            CapturePhotoCommand = new RelayCommand(CapturePhoto);
 
             Messenger.Default.Register<NotificationMessage<Customer>>(this, NotificationReceived);
         }
@@ -81,6 +92,12 @@ namespace DSS2014.Client.Portable.ViewModel
         {
             if (message.Notification == ViewModelLocator.CustomersReloadNotification && message.Content != null)
                 Customer = message.Content;
+        }
+
+        private async void CapturePhoto()
+        {
+            var photo = await _cameraService.CapturePhotoAsync();
+            
         }
     }
 }
