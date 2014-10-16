@@ -15,7 +15,9 @@
 
             <local:BootStrapper x:Key="BootStrapper" />
             <ViewModel:ViewModelLocator x:Key="Locator" />
+            
             <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <Converters:CustomerEditIsNewToTitleConverter x:Key="CustomerEditIsNewToTitleConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

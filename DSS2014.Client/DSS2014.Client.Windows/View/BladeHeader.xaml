@@ -1,0 +1,30 @@
+﻿<UserControl
+    x:Name="root"
+    x:Class="DSS2014.Client.View.BladeHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DSS2014.Client.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="60"
+    d:DesignWidth="400">
+    
+    <Grid Background="{StaticResource PrimaryPetrolBrush}" RequestedTheme="Dark">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="{Binding ElementName=root, Path=Title}" 
+                   VerticalAlignment="Center" 
+                   Margin="20,5" 
+                   TextTrimming="CharacterEllipsis"
+                   Foreground="{StaticResource LightForegroundBrush}"/>
+        <AppBarButton Visibility="{Binding ElementName=root, Path=HasCloseButton, Converter={StaticResource BoolToVisibilityConverter}}" 
+                      Icon="Cancel" 
+                      IsCompact="True" 
+                      Margin="0,-5" 
+                      Grid.Column="1" 
+                      Click="AppBarButton_Click" />
+    </Grid>
+</UserControl>

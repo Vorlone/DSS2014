@@ -28,6 +28,13 @@ namespace DSS2014.Client.Portable.ViewModel
             set { _customer = value; RaisePropertyChanged(); }
         }
 
+        private bool _isNew = false;
+        public bool IsNew
+        {
+            get { return _isNew; }
+            set { _isNew = value; RaisePropertyChanged(); }
+        }
+
         public CustomerEditViewModel(INavigationService navigationService, IDataService dataService, IDialogService dialogService)
         {
             _dataService = dataService;
@@ -41,9 +48,15 @@ namespace DSS2014.Client.Portable.ViewModel
         private void Init(Customer customer)
         {
             if (customer != null)
+            {
                 Customer = customer;
+                IsNew = false;
+            }
             else
+            {
                 Customer = new Customer();
+                IsNew = true;
+            }
         }
 
         private async void Save()
@@ -52,7 +65,7 @@ namespace DSS2014.Client.Portable.ViewModel
 
             HttpResponse<Customer> result;
 
-            if (_customer.Id == Guid.Empty)
+            if (_isNew)
                 result = await _dataService.CreateCustomerAsync(_customer);
             else
                 result = await _dataService.EditCustomerAsync(_customer);

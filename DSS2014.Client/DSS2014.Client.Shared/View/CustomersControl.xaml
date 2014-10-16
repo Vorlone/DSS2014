@@ -13,18 +13,13 @@
     DataContext="{Binding CustomersViewModel, Source={StaticResource Locator}}">
     
 	<Grid>
-        <ListView ItemsSource="{Binding Customers}" Padding="{StaticResource DefaultPagePadding}">
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<StackPanel Orientation="Horizontal"
+        <ListView x:Name="CustomersList" ItemsSource="{Binding Customers}" Padding="{StaticResource DefaultPagePadding}" SelectionMode="None" 
+                  IsItemClickEnabled="True" ItemClick="CustomersList_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal"
 						        Margin="0,0,0,10"
                                 Background="Transparent">
-						<Interactivity:Interaction.Behaviors>
-							<Core:EventTriggerBehavior EventName="PointerReleased">
-								<Core:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=CustomersViewModel.ShowCustomerDetailCommand}"
-                                                          CommandParameter="{Binding}"/>
-							</Core:EventTriggerBehavior>
-						</Interactivity:Interaction.Behaviors>
                         <Grid Width="70"
 							  Height="70"
 							  Margin="0,0,10,0">
@@ -35,17 +30,17 @@
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Grid>
-						<TextBlock VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center">
 							<Run Text="{Binding FirstName}" />
 							<Run Text="{Binding LastName}" />
 							<LineBreak />
 							<Run Text="{Binding Company}" 
 								Foreground="{StaticResource SecondaryForegroundBrush}" />
-						</TextBlock>
-					</StackPanel>
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <local:ProgressControl />
     </Grid>

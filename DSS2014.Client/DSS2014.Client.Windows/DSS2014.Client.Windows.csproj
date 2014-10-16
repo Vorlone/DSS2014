@@ -108,6 +108,9 @@
     <Compile Include="View\BladeFrame.xaml.cs">
       <DependentUpon>BladeFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BladeHeader.xaml.cs">
+      <DependentUpon>BladeHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomerDetailBlade.xaml.cs">
       <DependentUpon>CustomerDetailBlade.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\BladeFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BladeHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

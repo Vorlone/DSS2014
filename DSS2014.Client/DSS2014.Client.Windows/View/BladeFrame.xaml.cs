@@ -56,23 +56,10 @@ namespace DSS2014.Client.View
 
         public void NavigateTo(Type pageType, object parameter)
         {
-            var focussedElement = FocusManager.GetFocusedElement();
-
             if (_currentPage != null && pageType == _currentPage.GetType())
                 GoBack();
 
-            var firstElement = _navigationHistory.Where(e => e.GetType() == pageType).FirstOrDefault();
-            if (firstElement != null)
-            {
-                var firstElementIndex = _navigationHistory.IndexOf(firstElement);
-                while (_navigationHistory.Count > firstElementIndex)
-                {
-                    var element = _navigationHistory[_navigationHistory.Count - 1];
-                    BladeHost.Children.Remove(element);
-                    _navigationHistory.Remove(element);
-                }
-                GoBack();
-            }
+            RemoveAllBladesFromBladeToEnd(_navigationHistory.Where(e => e.GetType() == pageType).FirstOrDefault());
 
             if (_currentPage != null)
                 _navigationHistory.Add(_currentPage);
@@ -89,6 +76,29 @@ namespace DSS2014.Client.View
         public void NavigateTo(Type pageType)
         {
             NavigateTo(pageType, null);
+        }
+
+        public void CloseBlade(Blade blade)
+        {
+            if (_currentPage == blade)
+                GoBack();
+
+            RemoveAllBladesFromBladeToEnd(_navigationHistory.Where(e => e == blade).FirstOrDefault());
+        }
+
+        private void RemoveAllBladesFromBladeToEnd(Blade firstElement)
+        {
+            if (firstElement != null)
+            {
+                var firstElementIndex = _navigationHistory.IndexOf(firstElement);
+                while (_navigationHistory.Count > firstElementIndex)
+                {
+                    var element = _navigationHistory[_navigationHistory.Count - 1];
+                    BladeHost.Children.Remove(element);
+                    _navigationHistory.Remove(element);
+                }
+                GoBack();
+            }
         }
 
         public delegate void BladeNavigatedEventHandler(object sender, object parameter);

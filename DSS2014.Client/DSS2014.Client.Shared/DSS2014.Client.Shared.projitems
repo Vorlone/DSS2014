@@ -17,6 +17,8 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)BootStrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\CustomerEditIsNewToTitleConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\VisualTreeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\ResourceService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\CustomerDetailControl.xaml.cs">
       <DependentUpon>CustomerDetailControl.xaml</DependentUpon>

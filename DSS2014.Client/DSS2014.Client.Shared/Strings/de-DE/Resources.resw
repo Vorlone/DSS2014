@@ -163,11 +163,20 @@
   <data name="CustomerDetailLabelZip.Text" xml:space="preserve">
     <value>PLZ</value>
   </data>
+  <data name="CustomerDetailTitle.Title" xml:space="preserve">
+    <value>Kunde</value>
+  </data>
   <data name="CustomerEditAppBarButtonCancel.Label" xml:space="preserve">
     <value>abbrechen</value>
   </data>
   <data name="CustomerEditAppBarButtonSave.Label" xml:space="preserve">
     <value>speichern</value>
+  </data>
+  <data name="CustomerEditTitleEdit" xml:space="preserve">
+    <value>Kunde bearbeiten</value>
+  </data>
+  <data name="CustomerEditTitleNew" xml:space="preserve">
+    <value>Kunde anlegen</value>
   </data>
   <data name="CustomerLoadingErrorButton" xml:space="preserve">
     <value>OK</value>
@@ -195,5 +204,8 @@
   </data>
   <data name="CustomersLoadingMessage" xml:space="preserve">
     <value>Lade Kunden...</value>
+  </data>
+  <data name="CustomersTitle.Title" xml:space="preserve">
+    <value>Kunden</value>
   </data>
 </root>

@@ -12,13 +12,15 @@
 
     <Grid Background="{StaticResource PrimaryBackgroundBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <local:CustomerEditControl />
 
-        <Border Grid.Row="1" Background="{StaticResource AppBarBackgroundBrush}">
+        <local:BladeHeader Title="{Binding IsNew, Converter={StaticResource CustomerEditIsNewToTitleConverter}}"/>
+        <local:CustomerEditControl Grid.Row="1" />
+
+        <Border Grid.Row="2" Background="{StaticResource AppBarBackgroundBrush}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <AppBarButton Icon="Save" 
                               x:Uid="CustomerEditAppBarButtonSave"

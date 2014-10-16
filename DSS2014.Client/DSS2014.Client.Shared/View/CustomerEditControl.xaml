@@ -12,8 +12,6 @@
     <Grid>
         <ScrollViewer Padding="{StaticResource DefaultPagePadding}" VerticalScrollMode="Auto">
             <StackPanel>
-                <TextBlock Text="[Page Header]" Style="{StaticResource HeaderTextBlockStyle}" />
-
                 <TextBlock x:Uid="CustomerDetailLabelFirstName" Foreground="{StaticResource SecondaryForegroundBrush}" />
                 <TextBox Text="{Binding Customer.FirstName, Mode=TwoWay}" Margin="0,0,0,20" />
 

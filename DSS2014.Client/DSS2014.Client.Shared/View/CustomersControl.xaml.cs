@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DSS2014.Client.Portable.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,11 @@ namespace DSS2014.Client.View
         public CustomersControl()
         {
             this.InitializeComponent();
+        }
+
+        private void CustomersList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ((CustomersViewModel)this.DataContext).ShowCustomerDetailCommand.Execute(e.ClickedItem);
         }
     }
 }
