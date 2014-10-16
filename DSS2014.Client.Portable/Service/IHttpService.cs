@@ -10,5 +10,7 @@ namespace DSS2014.Client.Portable.Service
     public interface IHttpService
     {
         Task<HttpResponse<String>> ExecuteAsync(string requestUrl, HttpMode mode, string message = null);
+
+        Task<HttpResponse<byte[]>> GetBinaryAsync(string requestUrl);
     }
 }

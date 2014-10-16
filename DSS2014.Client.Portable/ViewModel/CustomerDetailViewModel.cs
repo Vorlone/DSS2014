@@ -21,21 +21,14 @@ namespace DSS2014.Client.Portable.ViewModel
 
         public RelayCommand EditCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
-        public RelayCommand<Customer> InitCommand { get; private set; }
+        public RelayCommand<CustomerViewModel> InitCommand { get; private set; }
         public RelayCommand CapturePhotoCommand { get; private set; }
 
-        private Customer _customer;
-        public Customer Customer
+        private CustomerViewModel _customer;
+        public CustomerViewModel Customer
         {
             get { return _customer; }
             set { _customer = value; RaisePropertyChanged(); }
-        }
-
-        private byte[] _photo;
-        public byte[] Photo
-        {
-            get { return _photo; }
-            set { _photo = value; RaisePropertyChanged(); }
         }
 
         public CustomerDetailViewModel(IDataService dataService, INavigationService navigationService, IDialogService dialogService, IResourceService resourceService, ICameraService cameraService)
@@ -46,15 +39,15 @@ namespace DSS2014.Client.Portable.ViewModel
             _resourceService = resourceService;
             _cameraService = cameraService;
 
-            InitCommand = new RelayCommand<Customer>(Init);
+            InitCommand = new RelayCommand<CustomerViewModel>(Init);
             EditCommand = new RelayCommand(Edit);
             DeleteCommand = new RelayCommand(Delete);
             CapturePhotoCommand = new RelayCommand(CapturePhoto);
 
-            Messenger.Default.Register<NotificationMessage<Customer>>(this, NotificationReceived);
+            Messenger.Default.Register<NotificationMessage<CustomerViewModel>>(this, NotificationReceived);
         }
 
-        private void Init(Customer customer)
+        private void Init(CustomerViewModel customer)
         {
             Customer = customer;
         }
@@ -66,7 +59,7 @@ namespace DSS2014.Client.Portable.ViewModel
 
         private void Delete()
         {
-            _dialogService.ShowMessage(String.Format(_resourceService.GetString("CustomerDetailConfirmDeleteMessage"), _customer.FirstName, _customer.LastName),
+            _dialogService.ShowMessage(String.Format(_resourceService.GetString("CustomerDetailConfirmDeleteMessage"), _customer.Customer.FirstName, _customer.Customer.LastName),
                                         _resourceService.GetString("CustomerDetailConfirmDeleteTitle"),
                                         _resourceService.GetString("CustomerDetailConfirmDeleteButtonOK"),
                                         _resourceService.GetString("CustomerDetailConfirmDeleteButtonCancel"), 
@@ -74,10 +67,10 @@ namespace DSS2014.Client.Portable.ViewModel
             {
                 if (confirmed)
                 {
-                    var result = await _dataService.DeleteCustomerAsync(_customer.Id);
+                    var result = await _dataService.DeleteCustomerAsync(_customer.Customer.Id);
                     if (result.IsSuccessStatusCode)
                     {
-                        Messenger.Default.Send<NotificationMessage<Customer>>(new NotificationMessage<Customer>(null, ViewModelLocator.CustomersReloadNotification));
+                        Messenger.Default.Send<NotificationMessage<CustomerViewModel>>(new NotificationMessage<CustomerViewModel>(null, ViewModelLocator.CustomersReloadNotification));
                         _navigationService.GoBack();
                     }
                     else
@@ -88,7 +81,7 @@ namespace DSS2014.Client.Portable.ViewModel
             });
         }
 
-        private void NotificationReceived(NotificationMessage<Customer> message)
+        private void NotificationReceived(NotificationMessage<CustomerViewModel> message)
         {
             if (message.Notification == ViewModelLocator.CustomersReloadNotification && message.Content != null)
                 Customer = message.Content;
@@ -97,7 +90,11 @@ namespace DSS2014.Client.Portable.ViewModel
         private async void CapturePhoto()
         {
             var photo = await _cameraService.CapturePhotoAsync();
-            
+            if (photo != null)
+            {
+                Customer.Photo = photo;
+                // todo: upload photo
+            }
         }
     }
 }

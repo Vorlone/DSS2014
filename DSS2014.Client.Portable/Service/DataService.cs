@@ -25,17 +25,7 @@ namespace DSS2014.Client.Portable.Service
         public async Task<HttpResponse<IEnumerable<Customer>>> GetCustomersAsync()
         {
             var requestUrl = CreateCustomerUrl();
-            var result = await GetDeserializedObject<IEnumerable<Customer>>(requestUrl, HttpMode.Get);
-
-            if (result.IsSuccessStatusCode && result.Result != null)
-            {
-                foreach (Customer c in result.Result)
-                {
-                    c.PhotoUrl = ConvertToAbsoluteAssetUrl(c.PhotoUrl);
-                }
-            }
-
-            return result;
+            return await GetDeserializedObject<IEnumerable<Customer>>(requestUrl, HttpMode.Get);
         }
 
         public async Task<HttpResponse<Customer>> GetCustomerAsync(Guid id)
@@ -62,6 +52,12 @@ namespace DSS2014.Client.Portable.Service
         {
             var requestUrl = CreateCustomerUrl(id.ToString());
             return await GetDeserializedObject<Customer>(requestUrl, HttpMode.Delete);
+        }
+
+        public async Task<HttpResponse<byte[]>> GetPhotoAsync(string fileName)
+        {
+            var requestUrl = ConvertToAbsoluteAssetUrl(fileName);
+            return await _httpService.GetBinaryAsync(requestUrl);
         }
 
         private async Task<HttpResponse<T>> GetDeserializedObject<T>(string requestUrl, HttpMode mode, string message = null)

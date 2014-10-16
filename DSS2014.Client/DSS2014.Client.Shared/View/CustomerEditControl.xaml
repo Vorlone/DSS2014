@@ -13,28 +13,28 @@
         <ScrollViewer Padding="{StaticResource DefaultPagePadding}" VerticalScrollMode="Auto">
             <StackPanel>
                 <TextBlock x:Uid="CustomerDetailLabelFirstName" Foreground="{StaticResource SecondaryForegroundBrush}" />
-                <TextBox Text="{Binding Customer.FirstName, Mode=TwoWay}" Margin="0,0,0,20" />
+                <TextBox Text="{Binding Customer.Customer.FirstName, Mode=TwoWay}" Margin="0,0,0,20" />
 
                 <TextBlock x:Uid="CustomerDetailLabelLastName" Foreground="{StaticResource SecondaryForegroundBrush}" />
-                <TextBox Text="{Binding Customer.LastName, Mode=TwoWay}" Margin="0,0,0,20" />
+                <TextBox Text="{Binding Customer.Customer.LastName, Mode=TwoWay}" Margin="0,0,0,20" />
 
                 <TextBlock x:Uid="CustomerDetailLabelCompany" Foreground="{StaticResource SecondaryForegroundBrush}" />
-                <TextBox Text="{Binding Customer.Company, Mode=TwoWay}" Margin="0,0,0,20" />
+                <TextBox Text="{Binding Customer.Customer.Company, Mode=TwoWay}" Margin="0,0,0,20" />
 
                 <TextBlock x:Uid="CustomerDetailLabelStreet" Foreground="{StaticResource SecondaryForegroundBrush}" />
-                <TextBox Text="{Binding Customer.Street, Mode=TwoWay}" Margin="0,0,0,20" />
+                <TextBox Text="{Binding Customer.Customer.Street, Mode=TwoWay}" Margin="0,0,0,20" />
 
                 <TextBlock x:Uid="CustomerDetailLabelZip" Foreground="{StaticResource SecondaryForegroundBrush}" />
-                <TextBox Text="{Binding Customer.Zip, Mode=TwoWay}" Margin="0,0,0,20" />
+                <TextBox Text="{Binding Customer.Customer.Zip, Mode=TwoWay}" Margin="0,0,0,20" />
 
                 <TextBlock x:Uid="CustomerDetailLabelCity" Foreground="{StaticResource SecondaryForegroundBrush}" />
-                <TextBox Text="{Binding Customer.City, Mode=TwoWay}" Margin="0,0,0,20" />
+                <TextBox Text="{Binding Customer.Customer.City, Mode=TwoWay}" Margin="0,0,0,20" />
 
                 <TextBlock x:Uid="CustomerDetailLabelCountry" Foreground="{StaticResource SecondaryForegroundBrush}" />
-                <TextBox Text="{Binding Customer.Country, Mode=TwoWay}" Margin="0,0,0,20" />
+                <TextBox Text="{Binding Customer.Customer.Country, Mode=TwoWay}" Margin="0,0,0,20" />
 
                 <TextBlock x:Uid="CustomerDetailLabelEmail" Foreground="{StaticResource SecondaryForegroundBrush}" />
-                <TextBox Text="{Binding Customer.Email, Mode=TwoWay}" Margin="0,0,0,20" />
+                <TextBox Text="{Binding Customer.Customer.Email, Mode=TwoWay}" Margin="0,0,0,20" />
             </StackPanel>
         </ScrollViewer>
         

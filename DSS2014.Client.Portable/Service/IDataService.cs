@@ -18,5 +18,7 @@ namespace DSS2014.Client.Portable.Service
         Task<HttpResponse<Customer>> EditCustomerAsync(Customer customer);
 
         Task<HttpResponse<Customer>> DeleteCustomerAsync(Guid id);
+
+        Task<HttpResponse<byte[]>> GetPhotoAsync(string fileName);
     }
 }

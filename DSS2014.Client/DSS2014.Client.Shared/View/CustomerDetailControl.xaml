@@ -14,40 +14,31 @@
             <!-- Header -->
             <StackPanel Orientation="Horizontal"
 						    Margin="0,0,0,20">
-                <Grid Width="70"
-					  Height="70"
-					  Margin="0,0,10,0">
-                    <Ellipse Fill="Silver" />
-                    <Ellipse>
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{Binding Customer.PhotoUrl}" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </Grid>
+                <local:PhotoControl Width="70" Height="70" Margin="0,0,10,0" Source="{Binding Customer.Photo}" />
                 <TextBlock VerticalAlignment="Center">
-						<Run Text="{Binding Customer.FirstName}" />
-						<Run Text="{Binding Customer.LastName}" />
+						<Run Text="{Binding Customer.Customer.FirstName}" />
+						<Run Text="{Binding Customer.Customer.LastName}" />
 						<LineBreak />
-						<Run Text="{Binding Customer.Company}" 
+						<Run Text="{Binding Customer.Customer.Company}" 
 							Foreground="{StaticResource SecondaryForegroundBrush}" />
                 </TextBlock>
             </StackPanel>
 
             <!-- Body -->
             <TextBlock x:Uid="CustomerDetailLabelStreet" Foreground="{StaticResource SecondaryForegroundBrush}"/>
-            <TextBlock Text="{Binding Customer.Street}" Margin="0,0,0,10" />
+            <TextBlock Text="{Binding Customer.Customer.Street}" Margin="0,0,0,10" />
 
             <TextBlock x:Uid="CustomerDetailLabelZip" Foreground="{StaticResource SecondaryForegroundBrush}"/>
-            <TextBlock Text="{Binding Customer.Zip}" Margin="0,0,0,10" />
+            <TextBlock Text="{Binding Customer.Customer.Zip}" Margin="0,0,0,10" />
 
             <TextBlock x:Uid="CustomerDetailLabelCity" Foreground="{StaticResource SecondaryForegroundBrush}"/>
-            <TextBlock Text="{Binding Customer.City}" Margin="0,0,0,10" />
+            <TextBlock Text="{Binding Customer.Customer.City}" Margin="0,0,0,10" />
 
             <TextBlock x:Uid="CustomerDetailLabelCountry" Foreground="{StaticResource SecondaryForegroundBrush}"/>
-            <TextBlock Text="{Binding Customer.Country}" Margin="0,0,0,10" />
+            <TextBlock Text="{Binding Customer.Customer.Country}" Margin="0,0,0,10" />
 
             <TextBlock x:Uid="CustomerDetailLabelEmail" Foreground="{StaticResource SecondaryForegroundBrush}"/>
-            <TextBlock Text="{Binding Customer.Email}" Margin="0,0,0,10" />
+            <TextBlock Text="{Binding Customer.Customer.Email}" Margin="0,0,0,10" />
 
         </StackPanel>
     </ScrollViewer>

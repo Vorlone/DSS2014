@@ -59,5 +59,25 @@ namespace DSS2014.Client.Portable.Service
                     return null;
             }
         }
+
+        public async Task<HttpResponse<byte[]>> GetBinaryAsync(string requestUrl)
+        {
+            var result = await _httpClient.GetAsync(requestUrl);
+            var response = new HttpResponse<byte[]>();
+            response.HttpStatusCode = result.StatusCode;
+            response.Location = result.RequestMessage.RequestUri;
+
+            if (result.IsSuccessStatusCode)
+            {
+                var bytes = await result.Content.ReadAsByteArrayAsync();
+                response.Result = bytes;
+            }
+            else
+            {
+                response.Message = await result.Content.ReadAsStringAsync();
+            }
+
+            return response;
+        }
     }
 }

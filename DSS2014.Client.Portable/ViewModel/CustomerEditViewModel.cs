@@ -19,10 +19,10 @@ namespace DSS2014.Client.Portable.ViewModel
 
         public RelayCommand SaveCommand { get; private set; }
         public RelayCommand CancelCommand { get; private set; }
-        public RelayCommand<Customer> InitCommand { get; private set; }
+        public RelayCommand<CustomerViewModel> InitCommand { get; private set; }
 
-        private Customer _customer;
-        public Customer Customer
+        private CustomerViewModel _customer;
+        public CustomerViewModel Customer
         {
             get { return _customer; }
             set { _customer = value; RaisePropertyChanged(); }
@@ -40,12 +40,12 @@ namespace DSS2014.Client.Portable.ViewModel
             _dataService = dataService;
             _dialogService = dialogService;
             _navigationService = navigationService;
-            InitCommand = new RelayCommand<Customer>(Init);
+            InitCommand = new RelayCommand<CustomerViewModel>(Init);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
         }
 
-        private void Init(Customer customer)
+        private void Init(CustomerViewModel customer)
         {
             if (customer != null)
             {
@@ -54,7 +54,7 @@ namespace DSS2014.Client.Portable.ViewModel
             }
             else
             {
-                Customer = new Customer();
+                Customer = new CustomerViewModel(new Customer(), _dataService);
                 IsNew = true;
             }
         }
@@ -66,14 +66,14 @@ namespace DSS2014.Client.Portable.ViewModel
             HttpResponse<Customer> result;
 
             if (_isNew)
-                result = await _dataService.CreateCustomerAsync(_customer);
+                result = await _dataService.CreateCustomerAsync(_customer.Customer);
             else
-                result = await _dataService.EditCustomerAsync(_customer);
+                result = await _dataService.EditCustomerAsync(_customer.Customer);
 
             if (result.IsSuccessStatusCode)
             {
                 Customer = null;
-                Messenger.Default.Send<NotificationMessage<Customer>>(new NotificationMessage<Customer>(result.Result, ViewModelLocator.CustomersReloadNotification));
+                Messenger.Default.Send<NotificationMessage<CustomerViewModel>>(new NotificationMessage<CustomerViewModel>(null, ViewModelLocator.CustomersReloadNotification));
                 _navigationService.GoBack();
             }
             else

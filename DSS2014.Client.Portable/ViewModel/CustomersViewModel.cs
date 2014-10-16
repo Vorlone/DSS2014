@@ -20,10 +20,10 @@ namespace DSS2014.Client.Portable.ViewModel
 
         public RelayCommand NewCommand { get; private set; }
         public RelayCommand RefreshCommand { get; private set; }
-        public RelayCommand<Customer> ShowCustomerDetailCommand { get; private set; }
+        public RelayCommand<CustomerViewModel> ShowCustomerDetailCommand { get; private set; }
 
-        private List<Customer> _customers;
-        public List<Customer> Customers
+        private List<CustomerViewModel> _customers;
+        public List<CustomerViewModel> Customers
         {
             get { return _customers; }
             set { _customers = value; RaisePropertyChanged(); }
@@ -38,9 +38,9 @@ namespace DSS2014.Client.Portable.ViewModel
 
             NewCommand = new RelayCommand(New);
             RefreshCommand = new RelayCommand(Refresh);
-            ShowCustomerDetailCommand = new RelayCommand<Customer>(ShowCustomerDetail);
+            ShowCustomerDetailCommand = new RelayCommand<CustomerViewModel>(ShowCustomerDetail);
 
-            Messenger.Default.Register<NotificationMessage<Customer>>(this, NotificationReceived);
+            Messenger.Default.Register<NotificationMessage<CustomerViewModel>>(this, NotificationReceived);
 
             LoadCustomers();
         }
@@ -53,7 +53,8 @@ namespace DSS2014.Client.Portable.ViewModel
             var result = await _dataService.GetCustomersAsync();
             if (result.IsSuccessStatusCode && result.Result != null)
             {
-                Customers = result.Result.OrderBy(e => e.FirstName).ToList();
+                Customers = (from c in result.Result.OrderBy(e => e.FirstName)
+                             select new CustomerViewModel(c, _dataService)).ToList();
             }
             else
             {
@@ -64,7 +65,7 @@ namespace DSS2014.Client.Portable.ViewModel
             IsLoading = false;
         }
 
-        private void ShowCustomerDetail(Customer customer)
+        private void ShowCustomerDetail(CustomerViewModel customer)
         {
             _navigationService.NavigateTo(ViewModelLocator.CustomerDetailPageKey, customer);
         }
@@ -79,7 +80,7 @@ namespace DSS2014.Client.Portable.ViewModel
             _navigationService.NavigateTo(ViewModelLocator.CustomerEditPageKey);
         }
 
-        private void NotificationReceived(NotificationMessage<Customer> message)
+        private void NotificationReceived(NotificationMessage<CustomerViewModel> message)
         {
             if (message.Notification == ViewModelLocator.CustomersReloadNotification)
                 LoadCustomers();

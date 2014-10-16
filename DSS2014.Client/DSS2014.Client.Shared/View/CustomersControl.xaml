@@ -26,21 +26,12 @@
                     <StackPanel Orientation="Horizontal"
 						        Margin="0,0,0,10"
                                 Background="Transparent">
-                        <Grid Width="70"
-							  Height="70"
-							  Margin="0,0,10,0">
-                            <Ellipse Fill="Silver" />
-                            <Ellipse>
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding PhotoUrl}" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                        </Grid>
+                        <local:PhotoControl Width="70" Height="70" Margin="0,0,10,0" Source="{Binding Photo}" />
                         <TextBlock VerticalAlignment="Center">
-							<Run Text="{Binding FirstName}" />
-							<Run Text="{Binding LastName}" />
+							<Run Text="{Binding Customer.FirstName}" />
+							<Run Text="{Binding Customer.LastName}" />
 							<LineBreak />
-							<Run Text="{Binding Company}" 
+							<Run Text="{Binding Customer.Company}" 
 								Foreground="{StaticResource SecondaryForegroundBrush}" />
                         </TextBlock>
                     </StackPanel>
